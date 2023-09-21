@@ -4,9 +4,9 @@ dataset:
   name: cifar10
   task: graph
   task_type: classification
-  node_encoder: true
+  node_encoder: false
   node_encoder_name: Atom
-  edge_encoder: true
+  edge_encoder: false
   edge_encoder_name: Bond
 train:
   batch_size: 128
