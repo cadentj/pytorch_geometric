@@ -251,7 +251,7 @@ def get_loader(dataset, sampler, batch_size, shuffle=True):
     if sampler == "full_batch" or len(dataset) > 1:
         loader_train = DataLoader(dataset, batch_size=batch_size,
                                   shuffle=shuffle, num_workers=cfg.num_workers,
-                                  pin_memory=True, persistent_workers=pw)
+                                  pin_memory=False, persistent_workers=pw)
     elif sampler == "neighbor":
         loader_train = NeighborSampler(
             dataset[0], sizes=cfg.train.neighbor_sizes[:cfg.gnn.layers_mp],
