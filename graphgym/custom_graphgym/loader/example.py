@@ -40,14 +40,15 @@ def CIFAR10(dataset_dir):
     # https://huggingface.co/datasets/graphs-datasets/CIFAR10
     data = datasets.load_dataset("graphs-datasets/CIFAR10")
 
-    cuda = torch.cuda.is_available()
-    device = torch.device("cuda:0" if cuda else "cpu")
+    # cuda = torch.cuda.is_available()
+    # device = torch.device("cuda:0" if cuda else "cpu")
 
     # Load all hf datasets into python lists
     # dataset_train_list = [Data.from_dict(cast(graph)).to(device) for graph in tqdm(data["train"])]
     # dataset_test_list = [Data.from_dict(cast(graph)).to(device) for graph in tqdm(data["test"])]
-    dataset_val_list = [Data.from_dict(cast(graph)).to(
-        device) for graph in tqdm(data["val"])]
+    temp = data["val"]
+    temp = temp[:1000]
+    dataset_val_list = [Data.from_dict(cast(graph)).cpu() for graph in tqdm(temp)]
 
     # cifarData = Dataset('CIFAR10', dataset_train_list + dataset_test_list + dataset_val_list)
     
