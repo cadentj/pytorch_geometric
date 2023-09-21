@@ -53,13 +53,13 @@ def CIFAR10(dataset_dir):
     
     cifarData = Dataset(dataset_dir, dataset_val_list)
 
-    train_indices, temp_indices = train_test_split(
+    train_indices, test_indices = train_test_split(
         range(len(cifarData)), test_size=0.2, random_state=42)
-    temp_indices, val_indices = train_test_split(
-        cifarData, test_size=0.25, random_state=42)
+    test_indices, val_indices = train_test_split(
+        test_indices, test_size=0.25, random_state=42)
 
     cifarData.data['train_graph_index'] = torch.tensor(train_indices)
-    cifarData.data['test_graph_index'] = torch.tensor(temp_indices)
+    cifarData.data['test_graph_index'] = torch.tensor(test_indices)
     cifarData.data['val_graph_index'] = torch.tensor(val_indices)
 
     return cifarData
