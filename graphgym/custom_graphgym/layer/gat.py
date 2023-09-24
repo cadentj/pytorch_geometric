@@ -1,3 +1,4 @@
+import torch.nn as nn
 from torch_geometric.nn import GATConv
 from torch_geometric.graphgym.register import register_layer
 
