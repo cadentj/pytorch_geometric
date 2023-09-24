@@ -1,3 +1,4 @@
+import os
 import torch
 import datasets
 from tqdm import tqdm
@@ -44,7 +45,12 @@ def CIFAR10(dataset_dir):
     # DataLoader places Data on cuda per batch. Initialize Data on cpu.
     # dataset_train_list = [Data.from_dict(cast(graph)).to(device) for graph in tqdm(data["train"])]
     # dataset_test_list = [Data.from_dict(cast(graph)).to(device) for graph in tqdm(data["test"])]
-    dataset_val_list = [Data.from_dict(cast(graph)).cpu() for graph in tqdm(data["val"])]
+    
+    if os.path.exists(f'{dataset_dir}/cifar10/pyg_data.pt'):
+        dataset_val_list = torch.load(f'{dataset_dir}/cifar10/pyg_data.pt')
+    else :
+        dataset_val_list = [Data.from_dict(cast(graph)).cpu() for graph in tqdm(data["val"])]
+        torch.save(dataset_val_list, f'{dataset_dir}/cifar10/pyg_data.pt')
 
     # cifarData = Dataset('CIFAR10', dataset_train_list + dataset_test_list + dataset_val_list)
     
