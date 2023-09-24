@@ -1,4 +1,5 @@
 from torch_geometric.nn import GATConv
+from torch_geometric.graphgym.register import register_layer
 
 @register_layer('GATConv')
 class ExampleConv2(nn.Module):
